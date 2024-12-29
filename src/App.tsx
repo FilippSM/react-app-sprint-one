@@ -18,23 +18,25 @@ function App() {
   return (
     <div className={"App"}>
       {/* <OnOff on={switchOn} onChange={on => {setSwitchOn(on)}}/> */}
-        {/* можно укоротить написать */}
-      <OnOff on={switchOn} onChange={setSwitchOn}/>
-      
-      <p>"UncontrolledOnOff:"</p>
-      <UncontrolledOnOff onChange={setSwitchOn}/> {switchOn.toString()}
-     
-      <Accordion 
-      titleValue={"Menu"} 
-      collapsed={accordionCollapsed} 
-      onChange={() => (setAccordionCollapsed(!accordionCollapsed))}/>
-      <UncontrolledAccordion titleValue={"MenuUnc"}/>
+      {/* можно укоротить написать */}
+      <OnOff on={switchOn} onChange={setSwitchOn} />
 
-      <Rating value={ratingValue} onClick={setRatingValue}/>
+      <p>"UncontrolledOnOff:"</p>
+      <UncontrolledOnOff onChange={setSwitchOn} /> {switchOn.toString()}
+
+      <Accordion
+        titleValue={"Menu"}
+        collapsed={accordionCollapsed}
+        onChange={() => (setAccordionCollapsed(!accordionCollapsed))} 
+      />
+      
+      <UncontrolledAccordion titleValue={"MenuUnc"} />
+
+      <Rating value={ratingValue} onClick={setRatingValue} />
 
       <UncontrolledRating />
       {/* <PageTitle title={"This is APP comment"} />*/}
-   
+
     </div>
   );
 }
