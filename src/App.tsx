@@ -34,7 +34,7 @@ function App() {
 
       <Rating value={ratingValue} onClick={setRatingValue} />
 
-      <UncontrolledRating />
+      <UncontrolledRating onChange={() => ("")}/>
       {/* <PageTitle title={"This is APP comment"} />*/}
 
     </div>
