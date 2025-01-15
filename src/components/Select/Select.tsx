@@ -1,4 +1,4 @@
-import { KeyboardEvent, useState } from 'react';
+import { KeyboardEvent, useEffect, useState } from 'react';
 import styles from './Select.module.css'
 
 type ItemType = {
@@ -19,6 +19,10 @@ export function Select(props: SelectPropsType) {
     const selectedItem = props.items.find(i => i.value === props.value)
     const hovereditem = props.items.find(i => i.value === hoveredElementValue)
 
+    useEffect(() => {
+        setHoveredElementValue(props.value)
+    }, [props.value])
+
     const toggleItems = () => setActive(!active)
     const onItemClick = (value: any) => {
         props.onChange(value);
@@ -33,13 +37,18 @@ export function Select(props: SelectPropsType) {
                         ? props.items[i + 1]
                         : props.items[i - 1]
 
-                        if (pretendentElement) {
-                            props.onChange(pretendentElement.value)
-                            break;    
-                        }
+                    if (pretendentElement) {
+                        props.onChange(pretendentElement.value)
+                        return;
+                    }
                 }
-                
             }
+            if (!selectedItem) {
+                props.onChange(props.items[0].value.value)
+            }
+        }
+        if (e.key === "Enter" || e.key === "Escape") {
+            setActive(false)
         }
     }
 
@@ -50,12 +59,12 @@ export function Select(props: SelectPropsType) {
                 {
                     active &&
                     <div className={styles.items}>
-                        {props.items.map(i => <div 
-                            onMouseEnter={() => {setHoveredElementValue(i.value)}}
+                        {props.items.map(i => <div
+                            onMouseEnter={() => { setHoveredElementValue(i.value) }}
                             className={styles.item + " " + (hovereditem === i ? styles.selected : "")}
                             key={i.value}
-                            onClick={() => {onItemClick(i.value)}}
-                            >{i.title}
+                            onClick={() => { onItemClick(i.value) }}
+                        >{i.title}
                         </div>)}
                     </div>
                 }
