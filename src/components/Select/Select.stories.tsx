@@ -2,6 +2,7 @@ import type { Meta } from '@storybook/react';
 
 import { Select } from './Select';
 import { action } from '@storybook/addon-actions';
+import { useState } from 'react';
 
 
 const meta: Meta<typeof Select> = {
@@ -11,9 +12,11 @@ const meta: Meta<typeof Select> = {
 export default meta;
 
 export const WithValue = () => {
+    const [value, setValue] = useState('2');
+
     return <Select
-        onChange={action('Value changed')}
-        value={'2'}
+        onChange={setValue}
+        value={value}
         items={[
             { value: '1', title: 'Minsk' },
             { value: '2', title: 'Moscow' },
@@ -23,8 +26,11 @@ export const WithValue = () => {
 }
 
 export const WithoutValue = () => {
+    const [value, setValue] = useState(null);
+
     return <Select
-        onChange={action('Value changed')}
+        onChange={setValue}
+        value={value}
         items={[
             { value: '1', title: 'Minsk' },
             { value: '2', title: 'Moscow' },
